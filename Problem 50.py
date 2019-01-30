@@ -5,3 +5,10 @@
 # Given the array [-5, -1, -8, -9], the maximum sum would be 0, since we would not take any elements.
 
 # Do this in O(N) time.
+
+def max_subarray_sum(arr):
+     max_ending_here = max_so_far = 0
+     for x in arr:
+         max_ending_here = max(x, max_ending_here + x)
+         max_so_far = max(max_so_far, max_ending_here)
+     return max_so_far
