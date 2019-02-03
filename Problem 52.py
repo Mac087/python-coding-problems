@@ -4,3 +4,10 @@
 # It should run in O(N) time.
 
 # Hint: Make sure each one of the 52! permutations of the deck is equally likely.
+
+def shuffle(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        j = randint(i, n - 1)
+        arr[i], arr[j] = arr[j], arr[i]
+    return arr
