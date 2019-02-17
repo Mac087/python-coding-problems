@@ -5,3 +5,29 @@
 
 # For example, given the string "the quick brown fox jumps over the lazy dog" and k = 10, you should return: ["the quick", "brown fox", "jumps over", "the lazy", "dog"]. 
 # No string in the list has a length of more than 10.
+
+def break(s, k):
+    words = s.split()
+
+    if not words:
+        return []
+
+    current = []
+    all = []
+
+    for i, word in enumerate(words):
+        if length(current + [word]) <= k:
+            current.append(word)
+        elif length([word]) > k:
+            return None
+        else:
+            all.append(current)
+            current = [word]
+    all.append(current)
+
+    return all
+
+def length(words):
+    if not words:
+        return 0
+    return sum(len(word) for word in words) + (len(words) - 1)
