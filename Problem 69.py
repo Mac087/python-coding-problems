@@ -16,3 +16,22 @@
 # [0 0 0 0 0]
 # [b 0 0 0 0]
 # You should return 2, since bishops 1 and 3 attack each other, as well as bishops 3 and 4.
+
+
+from collections import defaultdict
+
+TOP_LEFT_TO_BOTTOM_RIGHT = 0
+TOP_RIGHT_TO_BOTTOM_LEFT = 1
+
+def combos(num):
+    return num * (num - 1) / 2
+
+def pairs(bishops, m):
+    counts = defaultdict(int)
+    for r, c in bishops:
+        top_lr, top_lc = (r - min(r, c), c - min(r, c))
+        top_rr, top_rc = (r - min(r, m - c), c + min(r, m - c))
+
+        counts[top_lr, top_lc, TOP_LEFT_TO_BOTTOM_RIGHT] += 1
+        counts[top_rr, top_rc, TOP_RIGHT_TO_BOTTOM_LEFT] += 1
+    return sum(combos(c) for c in counts.values())
